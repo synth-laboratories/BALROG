@@ -208,5 +208,8 @@ def setup_environment(
     genai.configure(api_key=secrets[gemini_tag])
     os.environ["ANTHROPIC_API_KEY"] = secrets[anthropic_tag]
     os.environ["OPENAI_API_KEY"] = secrets[openai_tag]
+    
+    print(f"OPENAI_API_KEY: {os.environ['OPENAI_API_KEY'][:6]}...")
+
     if organization is not None:
         openai.organization = secrets[organization]

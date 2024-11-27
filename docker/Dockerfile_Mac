@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-dev \
     ninja-build \
     curl \
-    wget
+    wget \
+    libgl1-mesa-glx  # Added this line to install libGL.so.1
 
 ARG PYTHON_VERSION=3.10
 ENV DEBIAN_FRONTEND=noninteractive
@@ -37,4 +38,5 @@ RUN pip install '.'
 RUN python post_install.py
 
 CMD ["/bin/bash"]
-# docker run -it -v ./results:/opt/balrog/results --name balrog
+# docker build --file docker/Dockerfile_Mac . --tag balrog:1
+# docker run -it -v ./results:/opt/balrog/results balrog:1

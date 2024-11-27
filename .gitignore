@@ -167,3 +167,6 @@ cython_debug/
 tw-games.zip
 /demos
 /demos.zip
+
+# Secrets
+SECRETS
