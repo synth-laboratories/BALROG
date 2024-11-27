@@ -10,7 +10,7 @@ eval:
   resume_from: null      # Path to to the incomplete results file to resume an incomplete run
   num_workers: 16        # Number of parallel workers. Increase for faster evaluation if you have enough resources
   num_episodes:          # Minimum number of episodes to run for each environment. You can optionally increase this to get more reliable results
-    nle: 5               # Number of episodes for the 'nle' environment
+    nle: 0               # Number of episodes for the 'nle' environment !!! WAS ORIGINALLY 5 !!!
     minihack: 5          # Number of episodes for each 'minihack' task
     babyai: 10           # Number of episodes for each 'babyai' task
     crafter: 10          # Number of episodes for the 'crafter' environment
