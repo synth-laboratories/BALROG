@@ -34,6 +34,7 @@ setup(
         "textworld @ git+https://github.com/balrog-ai/TextWorld.git",
         "minigrid @ git+https://github.com/BartekCupial/Minigrid.git",
         "baba @ git+https://github.com/nacloos/baba-is-ai.git",
+        "synth-sdk",
     ],
     entry_points={
         "console_scripts": [
