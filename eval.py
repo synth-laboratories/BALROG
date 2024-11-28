@@ -66,6 +66,7 @@ def main(config: DictConfig):
 
     # create a dummy dataset for upload 
     # Create dataset for upload
+    '''
     dataset = Dataset(
         questions=[
             TrainingQuestion(
@@ -85,9 +86,9 @@ def main(config: DictConfig):
             for i in range(2)
         ],
     )
-
+    '''
     # upload to synth 
-    upload(dataset, verbose=True)
+    #upload(dataset, verbose=True)
 
 
 if __name__ == "__main__":
