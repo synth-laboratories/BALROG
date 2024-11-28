@@ -19,22 +19,11 @@ setup(
         "website": "https://www.balrogai.com/",
     },
     install_requires=[
-        "openai",
-        "anthropic",
-        "google-generativeai",
-        "hydra-core",
-        "opencv-python-headless",
-        "wandb",
-        "pytest",
-        "crafter",
-        "gym==0.23",
-        "requests",
+        "minihack @ file:///opt/balrog/wheels/minihack-0.1.6+3ecb6da-py3-none-any.whl",
+        "balrog-textworld @ file:///opt/balrog/wheels/balrog_textworld-1.6.2rc1-cp310-cp310-linux_aarch64.whl",
+        "minigrid @ file:///opt/balrog/wheels/minigrid-2.3.1-py3-none-any.whl",
+        "baba @ file:///opt/balrog/wheels/baba-0.0.1-py3-none-any.whl",
         "balrog-nle",
-        "minihack @ git+https://github.com/balrog-ai/minihack.git",
-        "textworld @ git+https://github.com/balrog-ai/TextWorld.git",
-        "minigrid @ git+https://github.com/BartekCupial/Minigrid.git",
-        "baba @ git+https://github.com/nacloos/baba-is-ai.git",
-        "synth-sdk",
     ],
     entry_points={
         "console_scripts": [
@@ -56,3 +45,10 @@ setup(
     include_package_data=True,
     python_requires=">=3.8",
 )
+
+# Wheels are built with the following commands since building them in the docker container is TIME CONSUMING
+# Build wheels for each package
+# pip wheel git+https://github.com/balrog-ai/minihack.git
+# pip wheel git+https://github.com/balrog-ai/TextWorld.git
+# pip wheel git+https://github.com/BartekCupial/Minigrid.git
+# pip wheel git+https://github.com/nacloos/baba-is-ai.git

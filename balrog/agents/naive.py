@@ -2,9 +2,6 @@ import copy
 import re
 from synth_sdk.tracing.decorators import trace_system
 from synth_sdk.tracing.trackers import SynthTracker
-from synth_sdk.tracing.upload import upload
-from synth_sdk.tracing.abstractions import TrainingQuestion, RewardSignal, Dataset
-from synth_sdk.tracing.events.store import event_store
 
 from balrog.agents.base import BaseAgent
 

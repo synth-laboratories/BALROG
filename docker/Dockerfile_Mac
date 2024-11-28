@@ -20,26 +20,33 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /opt/conda_setup
 
+COPY requirements.txt /opt/
 COPY conda_env.tar.gz* /opt/
 RUN if [ -f "/opt/conda_env.tar.gz" ]; then \
-        echo "Found conda environment tarball----------------------------------------------"; \
-        tar -xzf /opt/conda_env.tar.gz -C /opt; \
+        echo "Found conda environment tarball----------------------------------------------" && \
+        tar -xzf /opt/conda_env.tar.gz -C /opt && \
+        echo "Extracted conda environment tarball----------------------------------------------"; \
     else \
-        echo "No conda environment tarball found----------------------------------------------"; \
-        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O miniconda.sh \
-        && chmod +x miniconda.sh \
-        && ./miniconda.sh -b -p /opt/conda \
-        && /opt/conda/bin/conda install -y python=$PYTHON_VERSION \
-        && /opt/conda/bin/conda clean -ya \
-        && tar -czf /opt/conda_env.tar.gz -C /opt conda/ \
-        && python -m pip install --upgrade pip ipython ipdb; \
+        echo "No conda environment tarball found++++++++++++++++++++++++++++++++++++++++++++++" && \
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O miniconda.sh && \
+        chmod +x miniconda.sh && \
+        ./miniconda.sh -b -p /opt/conda && \
+        /opt/conda/bin/conda install -y python=$PYTHON_VERSION && \
+        /opt/conda/bin/conda clean -ya && \
+        tar -czf /opt/conda_env.tar.gz -C /opt conda/ && \
+        /opt/conda/bin/python -m pip install --upgrade pip ipython ipdb && \
+        /opt/conda/bin/pip install -r /opt/requirements.txt && \
+        echo "Installed requirements++++++++++++++++++++++++++++++++++++++++++++++++++++++"; \
     fi
 
 ENV PATH=/opt/conda/bin:$PATH
 
-COPY . /opt/balrog/
+# Copy wheels before the main project files
+COPY wheels/ /opt/balrog/wheels/
 
+COPY . /opt/balrog/
 WORKDIR /opt/balrog
+#COPY wheels/ /app/wheels/
 
 # Only install project if it's not already installed
 RUN if ! pip show balrog > /dev/null; then \
