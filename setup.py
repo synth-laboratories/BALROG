@@ -23,7 +23,7 @@ setup(
         "balrog-textworld @ file:///opt/balrog/wheels/balrog_textworld-1.6.2rc1-cp310-cp310-linux_aarch64.whl",
         "minigrid @ file:///opt/balrog/wheels/minigrid-2.3.1-py3-none-any.whl",
         "baba @ file:///opt/balrog/wheels/baba-0.0.1-py3-none-any.whl",
-        "balrog-nle",
+        "balrog-nle @ file:///opt/balrog/wheels/balrog_nle-0.9.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
     ],
     entry_points={
         "console_scripts": [
