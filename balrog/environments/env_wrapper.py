@@ -24,21 +24,21 @@ class EnvWrapper(gym.Wrapper):
         obs, info = self.env.reset(**kwargs)
         return self._process_observation(obs), info
 
-    @trace_system(
-        origin="env",
-        event_type="step",
-        manage_event="create",
-        increment_partition=True,
-        verbose=True,
-    )
+    # @trace_system(
+    #     origin="env",
+    #     event_type="step",
+    #     manage_event="create",
+    #     increment_partition=True,
+    #     verbose=True,
+    # )
     def step(self, action):
         obs, reward, terminated, truncated, info = self.env.step(action)
         processed_obs = self._process_observation(obs)
-        SynthTracker.track_state(variable_name="obs", variable_value=processed_obs, origin="env")
-        SynthTracker.track_state(variable_name="action", variable_value=action, origin="agent")
-        SynthTracker.track_state(variable_name="reward", variable_value=reward, origin="env")
-        SynthTracker.track_state(variable_name="terminated", variable_value=terminated, origin="env")
-        SynthTracker.track_state(variable_name="truncated", variable_value=truncated, origin="env")
+        # SynthTracker.track_state(variable_name="obs", variable_value=processed_obs, origin="env")
+        # SynthTracker.track_state(variable_name="action", variable_value=action, origin="agent")
+        # SynthTracker.track_state(variable_name="reward", variable_value=reward, origin="env")
+        # SynthTracker.track_state(variable_name="terminated", variable_value=terminated, origin="env")
+        # SynthTracker.track_state(variable_name="truncated", variable_value=truncated, origin="env")
         return processed_obs, reward, terminated, truncated, info
 
     def _process_observation(self, obs):

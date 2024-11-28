@@ -1,0 +1,11 @@
+# Create a temporary Docker container to build the wheels
+docker run --rm -v $(pwd):/work -w /work nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04 bash -c "
+    apt-get update && \
+    apt-get install -y python3-pip python3-dev build-essential git && \
+    pip install wheel && \
+    python3 -m pip wheel git+https://github.com/balrog-ai/TextWorld.git && \
+    python3 -m pip wheel git+https://github.com/balrog-ai/minihack.git && \
+    python3 -m pip wheel git+https://github.com/BartekCupial/Minigrid.git && \
+    python3 -m pip wheel git+https://github.com/nacloos/baba-is-ai.git && \
+    ls -l *.whl
+"

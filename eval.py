@@ -13,6 +13,9 @@ from balrog.agents import AgentFactory
 from balrog.evaluator import EvaluatorManager
 from balrog.utils import collect_and_summarize_results, print_summary_table, setup_environment
 
+from synth_sdk.tracing.upload import upload
+from synth_sdk.tracing.abstractions import TrainingQuestion, RewardSignal, Dataset
+from synth_sdk.tracing.events.store import event_store
 
 @contextmanager
 def redirect_to_file(filepath):
@@ -60,6 +63,32 @@ def main(config: DictConfig):
     # Collect and summarize results
     summary = collect_and_summarize_results(output_dir)
     print_summary_table(summary)
+
+    # create a dummy dataset for upload 
+    # Create dataset for upload
+    '''
+    dataset = Dataset(
+        questions=[
+            TrainingQuestion(
+                intent="Test question",
+                criteria="Testing tracing functionality",
+                question_id=f"q{i}",
+            )
+            for i in range(2)
+        ],
+        reward_signals=[
+            RewardSignal(
+                question_id=f"q{i}",
+                system_id=agent.system_id,
+                reward=1.0,
+                annotation="Test reward",
+            )
+            for i in range(2)
+        ],
+    )
+    '''
+    # upload to synth 
+    #upload(dataset, verbose=True)
 
 
 if __name__ == "__main__":

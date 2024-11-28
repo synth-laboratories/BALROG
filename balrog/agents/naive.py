@@ -2,9 +2,6 @@ import copy
 import re
 from synth_sdk.tracing.decorators import trace_system
 from synth_sdk.tracing.trackers import SynthTracker
-from synth_sdk.tracing.upload import upload
-from synth_sdk.tracing.abstractions import TrainingQuestion, RewardSignal, Dataset
-from synth_sdk.tracing.events.store import event_store
 
 from balrog.agents.base import BaseAgent
 
@@ -17,13 +14,13 @@ class NaiveAgent(BaseAgent):
         super().__init__(client_factory, prompt_builder)
         self.client = client_factory()
 
-    @trace_system(
-        origin="agent",
-        event_type="lm_call",
-        manage_event="create",
-        increment_partition=True,
-        verbose=True,
-    )
+    # @trace_system(
+    #     origin="agent",
+    #     event_type="lm_call",
+    #     manage_event="create",
+    #     increment_partition=True,
+    #     verbose=True,
+    # )
     def act(self, obs, prev_action=None):
         """Generate the next action based on the observation and previous action.
 
@@ -34,7 +31,7 @@ class NaiveAgent(BaseAgent):
         Returns:
             str: The selected action from the LLM response.
         """
-        SynthTracker.track_state(variable_name="obs", variable_value=obs, origin="env")
+        #SynthTracker.track_state(variable_name="obs", variable_value=obs, origin="env")
 
         if prev_action:
             self.prompt_builder.update_action(prev_action)
@@ -54,7 +51,7 @@ You always have to output one of the above actions at a time and no other text. 
 
         final_answer = self._extract_final_answer(response)
 
-        SynthTracker.track_state(variable_name="final_answer", variable_value=final_answer, origin="agent")
+        # SynthTracker.track_state(variable_name="final_answer", variable_value=final_answer, origin="agent")
 
         return final_answer
 
